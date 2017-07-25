@@ -1,0 +1,25 @@
+#!/bin/bash
+
+# Bash strict mode
+set -euvo pipefail
+
+# Install deps
+sudo apt-get -y install \
+    apt-transport-https \
+    ca-certificates \
+    curl \
+    software-properties-common
+    
+# Get docker gpg key and trust it
+curl -fsSL https://download.docker.com/linux/ubuntu/gpg | sudo apt-key add -
+
+# Add docker repo
+sudo add-apt-repository -y "deb [arch=amd64] https://download.docker.com/linux/ubuntu zesty edge"
+   
+# Install docker
+sudo apt-get -y update
+sudo apt-get -y install docker-ce
+
+# Install docker-compose
+sudo curl -fsSL https://github.com/docker/compose/releases/download/1.13.0/docker-compose-Linux-x86_64 -o /usr/local/bin/docker-compose
+sudo chmod +x /usr/local/bin/docker-compose
