@@ -1,0 +1,34 @@
+#!/bin/bash
+
+# Bash strict mode
+set -euvo pipefail
+
+# Get deps
+sudo apt-get -y install curl
+
+# Download intellij and untar/zip it to opt
+sudo mkdir -p /opt/intellij-idea
+curl -fsSL https://download.jetbrains.com/webstorm/WebStorm-2017.2.tar.gz | sudo tar -xvzC /opt/webstorm/ --strip 1
+
+# Copy the logo
+sudo cp /opt/webstorm/bin/webstorm.svg /usr/share/pixmaps/webstorm.svg
+
+# Symlink idea to path
+sudo ln -s /opt/webstorm/bin/webstorm.sh /usr/local/bin/webstorm
+
+# Create the desktop entry
+sudo tee /tmp/webstorm.desktop << EOF
+[Desktop Entry]
+Name=Webstorm
+Type=Application
+Exec=webstorm
+Terminal=false
+Icon=webstorm.svg
+Comment=Integrated Development Environment
+NoDisplay=false
+Categories=Development;IDE;
+Name[en]=Webstorm
+EOF
+
+# Install the desktop file
+sudo desktop-file-install /tmp/webstorm.desktop
