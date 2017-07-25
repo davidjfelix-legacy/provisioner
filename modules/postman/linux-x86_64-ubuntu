@@ -1,0 +1,37 @@
+#!/bin/bash
+
+# Bash strict mode
+set -euvo pipefail
+
+# Install deps
+sudo apt-get -y install 
+    curl \
+    libgconf2-4
+
+# Download postman latest and untar/zip it to opt
+sudo mkdir -p /opt/postman
+curl -fsSL https://dl.pstmn.io/download/latest/linux64 | sudo tar -xvzC /opt/postman/
+
+# Copy the logo
+sudo cp /opt/postman/Postman/resources/app/assets/icon.png /usr/share/pixmaps/postman.png
+
+# Symlink idea to path
+sudo ln -s /opt/postman/Postman/Postman /usr/local/bin/postman
+
+# Create the desktop entry
+sudo tee /tmp/postman.desktop << EOF
+[Desktop Entry]
+Name=Postman
+Type=Application
+Exec=postman
+Terminal=false
+Icon=postman
+Comment=API Development Environment
+NoDisplay=false
+Categories=Development;
+Name[en]=Postman
+EOF
+
+# Install the desktop file
+sudo desktop-file-install /tmp/postman.desktop
+
