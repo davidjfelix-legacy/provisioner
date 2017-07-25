@@ -8,7 +8,7 @@ sudo apt-get -y install curl
 
 # Download intellij and untar/zip it to opt
 sudo mkdir -p /opt/intellij-idea-ce
-curl -fsSL https://download.jetbrains.com/idea/ideaIC-2017.1.3.tar.gz | sudo tar -xvzC /opt/intellij-ide-ce/ --strip 1
+curl -fsSL https://download.jetbrains.com/idea/ideaIC-2017.2.tar.gz | sudo tar -xvzC /opt/intellij-ide-ce/ --strip 1
 
 # Copy the logo
 sudo cp /opt/intellij-idea-ce/bin/idea.png /usr/share/pixmaps/idea-ce.png
