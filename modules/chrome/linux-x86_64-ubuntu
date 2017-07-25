@@ -1,0 +1,40 @@
+#!/bin/bash
+
+# Bash strict mode
+set -euvo pipefail
+
+# Install deps
+sudo apt-get -y install \
+    apt-transport-https \
+    ca-certificates \
+    curl \
+    software-properties-common
+
+# Get the chrome gpg key and trust it
+curl -fsSL https://dl-ssl.google.com/linux/linux_signing_key.pub | sudo apt-key add -
+
+# Add chrome repo
+sudo add-apt-repository -y "deb [arch=amd64] http://dl.google.com/linux/chrome/deb/ stable main"
+
+# Install chrome
+sudo apt-get -y update 
+sudo apt-get -y install google-chrome-stable
+
+# Copy the logo
+sudo cp /opt/google/chrome/product_logo_256.png /usr/share/pixmaps/chrome.png
+
+# Create a desktop file
+sudo tee /tmp/chrome.desktop << EOF
+[Desktop Entry]
+Name=Google Chrome with Proxy
+Type=Application
+Exec=google-chrome-stable
+Terminal=false
+Icon=chrome
+Comment=Google browser with local proxy configured for Kroger
+NoDisplay=false
+Name[en]=Google Chrome with Proxy
+EOF
+
+# Install the desktop file
+sudo desktop-file-install /tmp/chrome.desktop
