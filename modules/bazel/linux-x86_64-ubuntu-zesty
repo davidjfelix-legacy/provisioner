@@ -1,0 +1,24 @@
+#!/bin/bash
+
+# Bash strict mode
+set -euvo pipefail
+
+# Install deps
+sudo apt-get -y install \
+    apt-transport-https \
+    ca-certificates \
+    curl \
+    software-properties-common
+
+
+# Get the bazel gpg key and trust it
+curl https://bazel.build/bazel-release.pub.gpg | sudo apt-key add -
+
+# Add bazel repo
+sudo add-apt-repository -y "deb [arch=amd64] http://storage.googleapis.com/bazel-apt stable jdk1.8"
+
+# Install bazel
+sudo apt-get -y update 
+sudo apt-get -y install bazel
+
+# TODO: add zsh and bash completion to this step
