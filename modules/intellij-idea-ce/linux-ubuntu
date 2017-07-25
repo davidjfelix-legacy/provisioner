@@ -1,0 +1,34 @@
+#!/bin/bash
+
+# Bash strict mode
+set -euvo pipefail
+
+# Get deps
+sudo apt-get -y install curl
+
+# Download intellij and untar/zip it to opt
+sudo mkdir -p /opt/intellij-idea-ce
+curl -fsSL https://download.jetbrains.com/idea/ideaIC-2017.1.3.tar.gz | sudo tar -xvzC /opt/intellij-ide-ce/ --strip 1
+
+# Copy the logo
+sudo cp /opt/intellij-idea-ce/bin/idea.png /usr/share/pixmaps/idea-ce.png
+
+# Symlink idea to path
+sudo ln -s /opt/intellij-idea-ce/bin/idea.sh /usr/local/bin/idea-ce
+
+# Create the desktop entry
+sudo tee /tmp/idea-ce.desktop << EOF
+[Desktop Entry]
+Name=IntelliJ IDEA CE
+Type=Application
+Exec=idea-ce
+Terminal=false
+Icon=idea-ce
+Comment=Integrated Development Environment
+NoDisplay=false
+Categories=Development;IDE;
+Name[en]=IntelliJ IDEA CE
+EOF
+
+# Install the desktop file
+sudo desktop-file-install /tmp/idea-ce.desktop
