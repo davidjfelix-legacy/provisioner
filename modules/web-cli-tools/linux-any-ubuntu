@@ -1,0 +1,42 @@
+#!/bin/bash
+
+# Bash strict mode
+set -euvo pipefail
+
+# Get tools
+sudo apt-get -y install \
+    aria2 \
+    atop \
+    byobu \
+    curl \
+    elinks \
+    emacs \
+    htop \
+    httpie \
+    iftop \
+    iptraf \
+    iptraf-ng \
+    ipcalc \
+    jq \
+    less \
+    links \
+    links2 \
+    lynx \
+    most \
+    netcat \
+    nethogs \
+    netpipes \
+    nmap \
+    rsync \
+    rsyncrypto \
+    rtorrent \
+    screen \
+    siege \
+    socat \
+    tmux \
+    vim \
+    vim-gtk\
+    w3m \
+    wget
+
+# TODO: add tools not in apt
