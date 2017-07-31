@@ -1,0 +1,6 @@
+#!/bin/bash
+
+# Bash strict mode
+set -euvo pipefail
+
+brew cask install paw
