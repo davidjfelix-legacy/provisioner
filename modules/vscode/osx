@@ -3,4 +3,4 @@
 # Bash strict mode
 set -euvo pipefail
 
-brew cask install vscode
+brew cask install visual-studio-code
