@@ -1,0 +1,7 @@
+#!/bin/bash
+
+# Bash strict mode
+set -euvo pipefail
+
+# Fetch using brew cask. This assumes command line tools, brew and brewcask
+brew cask install discord
