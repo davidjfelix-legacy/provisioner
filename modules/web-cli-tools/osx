@@ -1,0 +1,33 @@
+#!/bin/bash
+
+# Bash strict mode
+set -euvo pipefail
+
+# Brew install command line utilities
+brew install \
+  aria2 \
+  byobu \
+  elinks \
+  emacs \
+  htop \
+  httpie \
+  iftop \
+  ipcalc \
+  jq \
+  less \
+  links \
+  lynx \
+  most \
+  netcat \
+  nethogs \
+  nmap \
+  rsync \
+  screen \
+  siege \
+  socat \
+  tmux \
+  vim \
+  w3m
+
+# Cask install a decent shell.
+brew cask install iterm2
