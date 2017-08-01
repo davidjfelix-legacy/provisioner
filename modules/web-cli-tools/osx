@@ -9,6 +9,7 @@ brew install \
   byobu \
   elinks \
   emacs \
+  exa \
   htop \
   httpie \
   iftop \
