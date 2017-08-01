@@ -1,0 +1,7 @@
+#!/bin/bash
+
+# Bash strict mode
+set -euvo pipefail
+
+# Docker for mac contains docker cli, docker engine and docker compose
+brew cask install docker
