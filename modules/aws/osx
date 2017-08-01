@@ -1,0 +1,17 @@
+#!/bin/bash
+
+# Bash strict mode
+set -euvo pipefail
+
+# Add repos
+brew tap wallix/awless
+
+# Fetch dependencies
+brew install node \
+
+brew install \
+  amazon-ecs-cli \
+  awless \
+  awscli
+
+npm install -g serverless
