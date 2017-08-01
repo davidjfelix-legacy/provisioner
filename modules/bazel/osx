@@ -3,4 +3,7 @@
 # Bash strict mode
 set -euvo pipefail
 
+# Dependencies
+brew cask install java
+
 brew install bazel
