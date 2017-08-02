@@ -4,12 +4,14 @@ Provisioning scripts for starting your machine up
 
 # Opinions
 
-* No tools for managing coexisting versions of tools which do not naturally coexist.
+* No third-party tools for managing coexisting versions of other tools which do not naturally coexist.
   EG: `rvm`, `pyenv`, `sdkman` or `nvm`.
   Tools for changing aliasing versions of software which do coexist are allowed.
   EG: `virtualenv`, or `direnv`.
   This tool will attempt to maintain simple forks and modern versions only.
   Python2/3 is a good example of supporting multiple versions. golang1.8/1.9 is not.
+  `rustup` is an interesting exception.
+  While it works similarly to `nvm`, it's also supported by the language as the official tool, making it the preferred install process.
 * The only assumptions which should be made globally are:
   - Full internet network access. Proxy settings should be obeyed but set externally to this script.
 * Assumptions per platform are:
