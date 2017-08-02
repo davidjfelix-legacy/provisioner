@@ -1,0 +1,35 @@
+#!/bin/bash
+
+# Bash strict mode
+set -euvo pipefail
+
+# Get deps
+sudo apt-get -y install curl
+
+# Download intellij and untar/zip it to opt
+sudo mkdir -p /opt/datagrip
+curl -fsSL https://download.jetbrains.com/datagrip/datagrip-2017.2.tar.gz | sudo tar -xvzC /opt/datagrip/ --strip 1
+
+# Copy the logo
+sudo cp /opt/datagrip/bin/datagrip.svg /usr/share/pixmaps/datagrip.svg
+
+# Symlink idea to path
+sudo ln -s /opt/datagrip/bin/datagrip.sh /usr/local/bin/datagrip
+sudo chmod +x /usr/local/bin/datagrip
+
+# Create the desktop entry
+sudo tee /tmp/datagrip.desktop << EOF
+[Desktop Entry]
+Name=Datagrip
+Type=Application
+Exec=datagrip
+Terminal=false
+Icon=datagrip
+Comment=Integrated Development Environment
+NoDisplay=false
+Categories=Development;IDE;
+Name[en]=Datagrip
+EOF
+
+# Install the desktop file
+sudo desktop-file-install /tmp/datagrip.desktop
