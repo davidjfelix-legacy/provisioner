@@ -1,9 +1,12 @@
 package main
 
 import (
-	"fmt"
+	"github.com/hatchery/provisioner/cmd"
+	"log"
 )
 
 func main() {
-	fmt.Println("This is just a placeholder")
+	if err := cmd.RootCmd.Execute(); err != nil {
+		log.Fatal(err)
+	}
 }
