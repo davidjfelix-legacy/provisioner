@@ -1,6 +1,14 @@
 package cmd
 
-import "github.com/spf13/cobra"
+import (
+	"github.com/spf13/cobra"
+	"runtime"
+	"os/exec"
+	"github.com/labstack/gommon/log"
+	"strings"
+	"fmt"
+)
+
 
 var InstallCmd = &cobra.Command{
 	Use:   "install",
@@ -12,8 +20,66 @@ var isDryRun bool
 
 func init() {
 	RootCmd.AddCommand(InstallCmd)
-	InstallCmd.Flags().BoolVarP(&isDryRun, "dry", "d", false,"See the commands as they would be executed")
+	InstallCmd.Flags().BoolVarP(&isDryRun, "dry", "d", false, "See the commands as they would be executed")
 }
 
 func install(cmd *cobra.Command, args []string) {
+}
+
+func getInstallerNames() []string {
+	var names []string
+
+	// FIXME: make all the osx installers be called 'darwin' and remove this block
+	var platform string
+	switch runtime.GOOS {
+	case "darwin":
+		platform = "osx"
+	default:
+		platform = runtime.GOOS
+	}
+	names = append(names, platform)
+
+	// FIXME: make all of the x86_64 installers be called amd64 and remove this block
+	var arch string
+	switch runtime.GOARCH {
+	case "amd64":
+		arch = "x86_64"
+		break
+	default:
+		arch = runtime.GOARCH
+	}
+	names = append(names, platform+"-"+arch)
+
+	switch runtime.GOOS {
+	case "darwin":
+		out, err := exec.Command("sw_vers", "-productVersion").Output()
+		if err != nil {
+			log.Fatal(err)
+		}
+		version, err := mapOsxVersions(string(out))
+		if err != nil {
+			log.Fatal(err)
+		}
+		names = append(
+			names,
+			platform+"-any-"+version,
+			platform+"-"+arch+"-"+version,
+		)
+	}
+	return names
+}
+
+func mapOsxVersions(versionNum string) (string, error) {
+	switch {
+	case strings.HasPrefix(versionNum, "17.13"):
+		return "high_sierra", nil
+	case strings.HasPrefix(versionNum, "17.12"):
+		return "sierra", nil
+	case strings.HasPrefix(versionNum, "17.11"):
+		return "el_capitan", nil
+	case strings.HasPrefix(versionNum, "17.10"):
+		return "mavericks", nil
+	default:
+		return "", fmt.Errorf("OSX version number not supported or not recognized: %s", versionNum)
+	}
 }
