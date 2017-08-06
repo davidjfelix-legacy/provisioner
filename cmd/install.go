@@ -29,15 +29,7 @@ func install(cmd *cobra.Command, args []string) {
 func getInstallerNames() []string {
 	var names []string
 
-	// FIXME: make all the osx installers be called 'darwin' and remove this block
-	var platform string
-	switch runtime.GOOS {
-	case "darwin":
-		platform = "osx"
-	default:
-		platform = runtime.GOOS
-	}
-	names = append(names, platform)
+	names = append(names, runtime.GOOS)
 
 	// FIXME: make all of the x86_64 installers be called amd64 and remove this block
 	var arch string
@@ -48,7 +40,7 @@ func getInstallerNames() []string {
 	default:
 		arch = runtime.GOARCH
 	}
-	names = append(names, platform+"-"+arch)
+	names = append(names, runtime.GOOS+"-"+arch)
 
 	switch runtime.GOOS {
 	case "darwin":
@@ -62,8 +54,8 @@ func getInstallerNames() []string {
 		}
 		names = append(
 			names,
-			platform+"-any-"+version,
-			platform+"-"+arch+"-"+version,
+			runtime.GOOS+"-any-"+version,
+			runtime.GOOS+"-"+arch+"-"+version,
 		)
 	}
 	return names
