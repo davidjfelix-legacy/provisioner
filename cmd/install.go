@@ -30,17 +30,7 @@ func getInstallerNames() []string {
 	var names []string
 
 	names = append(names, runtime.GOOS)
-
-	// FIXME: make all of the x86_64 installers be called amd64 and remove this block
-	var arch string
-	switch runtime.GOARCH {
-	case "amd64":
-		arch = "x86_64"
-		break
-	default:
-		arch = runtime.GOARCH
-	}
-	names = append(names, runtime.GOOS+"-"+arch)
+	names = append(names, runtime.GOOS+"-"+runtime.GOARCH)
 
 	switch runtime.GOOS {
 	case "darwin":
@@ -55,7 +45,7 @@ func getInstallerNames() []string {
 		names = append(
 			names,
 			runtime.GOOS+"-any-"+version,
-			runtime.GOOS+"-"+arch+"-"+version,
+			runtime.GOOS+"-"+runtime.GOARCH+"-"+version,
 		)
 	}
 	return names
