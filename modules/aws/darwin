@@ -7,7 +7,7 @@ set -euvo pipefail
 brew tap wallix/awless
 
 # Fetch dependencies
-brew install node \
+brew install node
 
 brew install \
   amazon-ecs-cli \
