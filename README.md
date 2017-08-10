@@ -17,8 +17,9 @@ Provisioning scripts for starting your machine up
 * Assumptions per platform are:
   - OSX:
     * Command line tools are installed
+    * Xcode license is in the "Accepted" state
     * User is admin
-    * Brew and Brew cask are installed
+    * Brew, Brew Cask, Brew Bundle and mas-cli are installed
   - Ubuntu:
     * The system is in "normal" state.
       No changes outside apt/dpkg which aren't normal.
