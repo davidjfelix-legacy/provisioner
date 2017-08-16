@@ -1,0 +1,9 @@
+#!/bin/bash
+
+# Bash strict mode
+set -euvo pipefail
+
+# Fetch dependencies
+brew install node
+
+npm install -g  @angular/cli
